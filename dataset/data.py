@@ -10,7 +10,7 @@ logger = logging.getLogger(HANDLE)
 class NABirdsDataset(Dataset):        
     def __init__(self, data_list) -> None:
         self.transforms = transforms.Compose([
-                        transforms.Resize((512, 512), Image.BILINEAR),
+                        transforms.Resize((256, 256), Image.BILINEAR),
                         # transforms.RandomCrop((384, 384)),
                         transforms.RandomHorizontalFlip(),
                         transforms.RandomApply([transforms.GaussianBlur(kernel_size=(5, 5), sigma=(0.1, 5))], p=0.1),
