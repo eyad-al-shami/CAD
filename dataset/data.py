@@ -1,11 +1,7 @@
 import os
 import pandas as pd
-from torchvision.io import read_image
-import torch
 from torch.utils.data import Dataset, DataLoader
-from torchvision import datasets
-from torchvision.transforms import ToTensor, transforms
-import matplotlib.pyplot as plt
+from torchvision.transforms import  transforms
 from PIL import Image
 import logging
 HANDLE = "CAD"
@@ -75,6 +71,8 @@ class NABirdsDataset(Dataset):
     def __getitem__(self, idx):
         # img_path = os.path.join(self.img_dir, self.imgs[idx][2])
         # label = int(self.imgs[idx][1])
+        print(self.data_list.iloc[idx])
+        print(type(self.data_list))
         img_path, label = self.data_list.iloc[idx]
         image = Image.open(img_path).convert('RGB')
         
@@ -123,8 +121,8 @@ def get_data_loaders(cfg):
     print(len(images_and_targets))
     print(images_and_targets[0])
 
-    train_loader = DataLoader(NABirdsDataset(train_data), batch_size=cfg.DATA.BATCH_SIZE, shuffle=True, num_workers=cfg.SYSTEM.NUM_WORKERS, persistent_workers=True)
-    test_loader = DataLoader(NABirdsDataset(test_data), batch_size=cfg.DATA.BATCH_SIZE, shuffle=False, num_workers=cfg.SYSTEM.NUM_WORKERS, persistent_workers=True)
+    train_loader = DataLoader(NABirdsDataset(images_and_targets), batch_size=cfg.DATA.BATCH_SIZE, shuffle=True, num_workers=cfg.SYSTEM.NUM_WORKERS, persistent_workers=True)
+    test_loader = DataLoader(NABirdsDataset(images_and_targets), batch_size=cfg.DATA.BATCH_SIZE, shuffle=False, num_workers=cfg.SYSTEM.NUM_WORKERS, persistent_workers=True)
     return train_loader, test_loader
 
 
@@ -149,3 +147,4 @@ def get_data_loaders(cfg):
 #         target = int(label_map[row['target']])
 #         images_and_targets.append([file_path,target])
 #     return images_and_targets,None,images_info
+    

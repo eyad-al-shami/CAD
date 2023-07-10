@@ -1,10 +1,5 @@
-import os
 from commandline.arguments import parser
 from configs import setup_cfg
-import torch
-import torch.optim as optim
-from tqdm import tqdm
-import numpy as np
 import utils
 from model import network
 from training import train
