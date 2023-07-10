@@ -2,10 +2,12 @@ from commandline.arguments import parser
 from configs import setup_cfg
 import utils
 from model import network
-from training import train
+import training
+import plain_resnet_training
 import logging
 from dataset import data
 import wandb
+import torch
 
 # Ignore warnings of PIL
 logging.getLogger("PIL").setLevel(logging.WARNING)
@@ -30,9 +32,15 @@ def main():
         print(cfg)
     else:
         # model = network._resnet('resnet50', "Bottleneck", [3, 4, 6, 3], False, True)
-        model = network._resnet(cfg)
         train_loader, val_loader = data.get_data_loaders(cfg)
-        train(model, train_loader, val_loader, wandb, cfg)
+        if cfg.MODEL.AD:
+            logger.info("++++++++++++ Training Adaptive Sampling-based resnet ++++++++++++")
+            model = network._resnet_ad(cfg)
+            training.train(model, train_loader, val_loader, wandb, cfg)
+        else:
+            logger.info("++++++++++++ Training plain resnet ++++++++++++")
+            model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
+            plain_resnet_training.train(model, train_loader, val_loader, wandb, cfg)
 
 if __name__ == '__main__':
     main()
