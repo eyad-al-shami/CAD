@@ -56,4 +56,4 @@ def test(model, dataloader, cfg):
             correct += pred.eq(target.view_as(pred)).sum().item()
     test_loss /= len(dataloader.dataset)
     wandb.log({'test_loss': test_loss, 'test_accuracy': correct / len(dataloader.dataset)})
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(test_loss,))
+    print('Test set: Accuracy: {}/{} ({:.0f}%)\n'.format(correct, len(dataloader.dataset), 100. * correct / len(dataloader.dataset)))
