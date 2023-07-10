@@ -9,6 +9,16 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
     model.train()
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=cfg.MODEL.LR, momentum=0.9)
+
+    activation = {}
+    def getActivation(name):
+        # the hook signature
+        def hook(model, input, output):
+            activation[name] = output
+        return hook
+
+    model.mask_estimator.register_forward_hook(getActivation('mask'))
+    
     for epoch in range(1, cfg.TRAIN.EPOCHS+1):
         correct = 0
         for data, target in tqdm.tqdm(train_dataloader):
