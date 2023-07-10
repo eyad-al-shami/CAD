@@ -69,12 +69,8 @@ class NABirdsDataset(Dataset):
         return len(self.data_list)
 
     def __getitem__(self, idx):
-        # img_path = os.path.join(self.img_dir, self.imgs[idx][2])
-        # label = int(self.imgs[idx][1])
         
-        print(type(self.data_list))
-        print(self.data_list.iloc[idx])
-        img_path, label = self.data_list.iloc[idx]
+        img_path, label = self.data_list[idx]
         image = Image.open(img_path).convert('RGB')
         
         if self.transforms:
