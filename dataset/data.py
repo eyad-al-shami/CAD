@@ -75,7 +75,7 @@ class NABirdsDataset(Dataset):
     def __getitem__(self, idx):
         # img_path = os.path.join(self.img_dir, self.imgs[idx][2])
         # label = int(self.imgs[idx][1])
-        img_path, label = self.data_list[idx]
+        img_path, label = self.data_list.iloc[idx]
         image = Image.open(img_path).convert('RGB')
         
         if self.transforms:
