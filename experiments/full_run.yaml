@@ -1,0 +1,7 @@
+TRAIN:
+  EPOCHS: 10
+DATA:
+  BATCH_SIZE: 28
+LOGGING:
+  EXPERIMENT_NAME: "full run for 10 epochs"
+

@@ -48,7 +48,7 @@ def test(model, dataloader, cfg):
     correct = 0
     criterion = torch.nn.CrossEntropyLoss()
     with torch.no_grad():
-        for data, target in dataloader:
+        for data, target in tqdm.tqdm(dataloader):
             data, target = data.to(cfg.DEVICE), target.to(cfg.DEVICE)
             output = model(data)
             test_loss += criterion(output['predictions'], target).item()
