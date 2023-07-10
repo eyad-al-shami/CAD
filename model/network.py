@@ -331,7 +331,6 @@ class ResNet(nn.Module):
         feature = self.avgpool(features)
         predictions = torch.flatten(feature, 1)
         predictions = self.fc(predictions)
-        print(f'output of the features {features.shape}')
 
         output = OrderedDict()
         output['predictions'] = predictions
