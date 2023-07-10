@@ -14,6 +14,6 @@ parser.add_argument('--use_cuda', action = 'store_true', help = "Use cuda for tr
 parser.add_argument('--use_cpu', action = 'store_true', help = "Use cpu for training")
 # add argument to do one pass to check if the code is working
 parser.add_argument('--dry_run', action = 'store_true', help = "Do one pass to check if the code is working")
-parser.add_argument('--AD', action = 'store_true', help = "use adaptive downsampling")
+parser.add_argument('--plain_resnet', action = 'store_true', help = "use adaptive downsampling")
 parser.add_argument('--config_debug', action = 'store_true', help = "Print the config and exit")
 # parser.add_argument("opts", default = None, nargs = argparse.REMAINDER, help = "modify config options using the command-line")

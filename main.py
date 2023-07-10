@@ -31,11 +31,10 @@ def main():
     if (cfg.CONFIG_DEBUG):
         print(cfg)
     else:
-        # model = network._resnet('resnet50', "Bottleneck", [3, 4, 6, 3], False, True)
         train_loader, val_loader = data.get_data_loaders(cfg)
         if cfg.MODEL.AD:
             logger.info("++++++++++++ Training Adaptive Sampling-based resnet ++++++++++++")
-            model = network._resnet_ad(cfg)
+            model = network._resnet(cfg)
             training.train(model, train_loader, val_loader, wandb, cfg)
         else:
             logger.info("++++++++++++ Training plain resnet ++++++++++++")

@@ -60,10 +60,10 @@ def merge_args_cfg(cfg, args):
         cfg.USE_CUDA = False
         cfg.DEVICE = "cpu"
 
-    if args.AD:
-        cfg.MODEL.AD = True
-    else:
+    if args.plain_resnet:
         cfg.MODEL.AD = False
+    else:
+        cfg.MODEL.AD = True
 
     
     # cfg.merge_from_list(args.opts)
