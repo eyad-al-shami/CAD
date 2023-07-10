@@ -54,6 +54,7 @@ _C.MODEL.BLOCK = "Bottleneck"
 _C.MODEL.LAYERS = [3, 4, 6, 3]
 _C.MODEL.LR = 0.001
 _C.MODEL.AD = True
+_C.MODEL.MASK_LOW_RES_ACTIVE = 0.3
 
 ###########################
 # Dataset

@@ -1,0 +1,9 @@
+TRAIN:
+  EPOCHS: 10
+DATA:
+  BATCH_SIZE: 28
+LOGGING:
+  EXPERIMENT_NAME: "less low res active, full run for 10 epochs"
+MODEL:
+  MASK_LOW_RES_ACTIVE: 0.1
+
