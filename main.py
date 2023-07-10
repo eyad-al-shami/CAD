@@ -6,6 +6,9 @@ from training import train
 import logging
 from dataset import data
 
+# Ignore warnings of PIL
+logging.getLogger("PIL").setLevel(logging.WARNING)
+
 
 logging.basicConfig(level=logging.NOTSET)
 HANDLE = "CAD"
