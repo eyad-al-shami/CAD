@@ -10,7 +10,6 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=cfg.MODEL.LR, momentum=0.9)
     for epoch in range(1, cfg.TRAIN.EPOCHS+1):
-        # use tqdm to show progress
         correct = 0
         for data, target in tqdm.tqdm(train_dataloader):
             data, target = data.to(cfg.DEVICE), target.to(cfg.DEVICE)
@@ -22,7 +21,7 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
             pred = output['predictions'].argmax(dim=1, keepdim=True)
             correct += pred.eq(target.view_as(pred)).sum().item()
         print('Train set: Accuracy: {}/{} ({:.0f}%)\n'.format(correct, len(train_dataloader.dataset), 100. * correct / len(train_dataloader.dataset)))
-        wandb.log({'epoch': epoch, 'loss': loss.item().detach().cpu(), 'train_accuracy': correct / len(train_dataloader.dataset)})
+        wandb.log({'epoch': epoch, 'loss': loss.item(), 'train_accuracy': correct / len(train_dataloader.dataset)})
         test(model, test_dataloader, cfg)
 
 
