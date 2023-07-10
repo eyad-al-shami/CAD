@@ -51,8 +51,8 @@ def test(model, dataloader, cfg):
         for data, target in dataloader:
             data, target = data.to(cfg.DEVICE), target.to(cfg.DEVICE)
             output = model(data)
-            test_loss += criterion(output, target).item()
-            pred = output.argmax(dim=1, keepdim=True)
+            test_loss += criterion(output['predictions'], target).item()
+            pred = output['predictions'].argmax(dim=1, keepdim=True)
             correct += pred.eq(target.view_as(pred)).sum().item()
     test_loss /= len(dataloader.dataset)
     wandb.log({'test_loss': test_loss, 'test_accuracy': correct / len(dataloader.dataset)})
