@@ -27,7 +27,7 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
         test(model, test_dataloader, cfg)
 
 
-def test(model, dataloader, cfg):
+def test(model, dataloader, cfg, epoch):
     model.eval()
     test_loss = 0
     correct = 0
@@ -40,5 +40,5 @@ def test(model, dataloader, cfg):
             pred = output.argmax(dim=1, keepdim=True)
             correct += pred.eq(target.view_as(pred)).sum().item()
     test_loss /= len(dataloader.dataset)
-    wandb.log({'test_loss': test_loss, 'test_accuracy': correct / len(dataloader.dataset)})
+    wandb.log({'epoch': epoch, 'test_loss': test_loss, 'test_accuracy': correct / len(dataloader.dataset)})
     print('Test set: Accuracy: {}/{} ({:.0f}%)\n'.format(correct, len(dataloader.dataset), 100. * correct / len(dataloader.dataset)))
