@@ -6,8 +6,9 @@ def train(model, train_dataloader, test_dataloader, cfg):
     model.train()
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=cfg.MODEL.LR, momentum=0.9)
-    for epoch in tqdm.tqdm(range(cfg.TRAIN.EPOCHS)):
-        for batch_idx, (data, target) in enumerate(train_dataloader):
+    for epoch in range(1, cfg.TRAIN.EPOCHS+1):
+        # use tqdm to show progress
+        for data, target in tqdm.tqdm(train_dataloader):
             data, target = data.to(cfg.DEVICE), target.to(cfg.DEVICE)
             optimizer.zero_grad()
             output = model(data)
