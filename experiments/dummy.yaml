@@ -1,0 +1,7 @@
+TRAIN:
+  EPOCHS: 1
+DATA:
+  BATCH_SIZE: 2
+LOGGING:
+  EXPERIMENT_NAME: "test run"
+
