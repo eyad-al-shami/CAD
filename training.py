@@ -1,6 +1,7 @@
 import torch
 import tqdm
 import wandb
+import torch.nn.functional as F
 
 
 
@@ -25,7 +26,13 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
             data, target = data.to(cfg.DEVICE), target.to(cfg.DEVICE)
             optimizer.zero_grad()
             output = model(data)
-            loss = criterion(output['predictions'], target)
+            
+            mask = activation['mask']
+            mask = F.gumbel_softmax(mask, tau=1, hard=True, dim=1)
+            mask_low_res_active = mask[:,1:2,:,:].sum() / mask[:,1:2,:,:].numel()
+            loss_mask = (mask_low_res_active - 0.3).square()
+
+            loss = criterion(output['predictions'], target) + loss_mask
             loss.backward()
             optimizer.step()
             pred = output['predictions'].argmax(dim=1, keepdim=True)
