@@ -24,7 +24,7 @@ def main():
     utils.set_random_seed(cfg.SEED)
 
     # wandb.init(project=cfg.LOGGING.PROJECT, entity="mengyuanliu")
-    wandb.init(project=cfg.LOGGING.PROJECT, entity="sawt", config=cfg)
+    wandb.init(project=cfg.LOGGING.PROJECT, entity="sawt", name=cfg.LOGGING.EXPERIMENT_NAME,  config=cfg)
 
     if (cfg.CONFIG_DEBUG):
         print(cfg)
