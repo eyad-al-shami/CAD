@@ -16,8 +16,9 @@ def merge_args_cfg(cfg, args):
     if (args.experiment_name):
         cfg.LOGGING.EXPERIMENT_NAME = args.experiment_name
     else:
-        logger.warning("No experiment name specified, using default")
-        cfg.LOGGING.EXPERIMENT_NAME = cfg.LOGGING.PROJECT + utils.get_readable_date_time()
+        if (cfg.LOGGING.EXPERIMENT_NAME == ""):
+            logger.warning("No experiment name specified, using default")
+            cfg.LOGGING.EXPERIMENT_NAME = cfg.LOGGING.PROJECT + " " + utils.get_readable_date_time()
 
     if args.data_dir:
         cfg.DATA.DATA_PATH = args.data_dir
