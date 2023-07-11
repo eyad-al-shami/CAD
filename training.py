@@ -39,7 +39,7 @@ def train(model, train_dataloader, test_dataloader, wandb, cfg):
             correct += pred.eq(target.view_as(pred)).sum().item()
         print('Train set: Accuracy: {}/{} ({:.0f}%)\n'.format(correct, len(train_dataloader.dataset), 100. * correct / len(train_dataloader.dataset)))
         wandb.log({'epoch': epoch, 'loss': loss.item(), 'train_accuracy': correct / len(train_dataloader.dataset)})
-        test(model, test_dataloader, cfg)
+        test(model, test_dataloader, cfg, epoch)
 
 
 def test(model, dataloader, cfg, epoch):
