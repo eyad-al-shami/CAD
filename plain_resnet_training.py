@@ -4,7 +4,6 @@ import wandb
 import torch.nn.functional as F
 
 
-
 def train(model, train_dataloader, test_dataloader, wandb, cfg):
     model.to(cfg.DEVICE)
     model.train()

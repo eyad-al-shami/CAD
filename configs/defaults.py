@@ -47,7 +47,6 @@ _C.LOGGING.PROJECT = "content-adaptive downsampling"
 # Models
 ###########################
 _C.MODEL = CN()
-_C.MODEL.LOW_RES_ACTIVE = 0.5
 _C.MODEL.BACKBONE = "resnet50"
 _C.MODEL.PRETRAINED = True
 _C.MODEL.BLOCK = "Bottleneck"
