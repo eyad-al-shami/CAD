@@ -73,8 +73,10 @@ class Trainer:
 
     def save_model_(self, accuracy, epoch):
         if (accuracy > self.highest_test_accuracy):
+            self.highest_test_accuracy = accuracy
             if (os.path.exists(self.output_dir) == False):
                 os.makedirs(self.output_dir)
+            print("Saving model with accuracy: ", accuracy)
             model_path = os.path.join(self.output_dir, 'best_model.pth')
             torch.save({
                 'epoch': epoch,
