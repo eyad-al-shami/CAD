@@ -36,7 +36,7 @@ def main():
             logger.info("++++++++++++ Training Adaptive Sampling-based resnet ++++++++++++")
             model = network._resnet(cfg)
             trainer = Trainer(model, train_loader, val_loader, wandb, cfg)
-            model, highest_test_acc = trainer.train(model, train_loader, val_loader, wandb, cfg)
+            model, highest_test_acc = trainer.train()
             wandb.finish()
         else:
             logger.info("++++++++++++ Training plain resnet ++++++++++++")
