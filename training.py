@@ -17,7 +17,6 @@ class Trainer:
 
     def train(self):
         self.model.to(self.cfg.DEVICE)
-        self.model.train()
         criterion = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.SGD(self.model.parameters(), lr=self.cfg.MODEL.LR, momentum=0.9)
 
@@ -31,6 +30,7 @@ class Trainer:
         self.model.mask_estimator.register_forward_hook(getActivation('mask'))
         
         for epoch in range(1, self.cfg.TRAIN.EPOCHS+1):
+            self.model.train()
             correct = 0
             for data, target in tqdm.tqdm(self.train_dataloader):
                 data, target = data.to(self.cfg.DEVICE), target.to(self.cfg.DEVICE)
