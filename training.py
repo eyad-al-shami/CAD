@@ -84,4 +84,4 @@ class Trainer:
                 'accuracy': accuracy,
                 'cfg': self.cfg
             }, model_path)
-            self.model.save(os.path.join(self.wandb.run.dir, "best_model.pth"))
+            self.wandb.save(model_path)
