@@ -2,7 +2,7 @@ from commandline.arguments import parser
 from configs import setup_cfg
 import utils
 from model import network
-import training
+from training import Trainer
 import plain_resnet_training
 import logging
 from dataset import data
@@ -35,7 +35,11 @@ def main():
         if cfg.MODEL.AD:
             logger.info("++++++++++++ Training Adaptive Sampling-based resnet ++++++++++++")
             model = network._resnet(cfg)
-            training.train(model, train_loader, val_loader, wandb, cfg)
+            trainer = Trainer(model, train_loader, val_loader, wandb, cfg)
+            model, highest_test_acc = trainer.train(model, train_loader, val_loader, wandb, cfg)
+            # use wandb to upload the model
+            wandb.save("model.pt")
+            wandb.finish()
         else:
             logger.info("++++++++++++ Training plain resnet ++++++++++++")
             model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet50', pretrained=True)
