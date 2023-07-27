@@ -37,8 +37,6 @@ def main():
             model = network._resnet(cfg)
             trainer = Trainer(model, train_loader, val_loader, wandb, cfg)
             model, highest_test_acc = trainer.train(model, train_loader, val_loader, wandb, cfg)
-            # use wandb to upload the model
-            wandb.save("model.pt")
             wandb.finish()
         else:
             logger.info("++++++++++++ Training plain resnet ++++++++++++")

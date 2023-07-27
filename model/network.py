@@ -321,7 +321,7 @@ class ResNet(nn.Module):
         x_down = x_down * downsampling_mask[:,1:2,:,:]
         x_high = x_high * downsampling_mask[:,0:1,:,:]
 
-                # plot the mask using plt
+        # plot the mask using plt
         # plt.imshow(downsampling_mask[0,1:2,:,:].detach().cpu().numpy().squeeze(), cmap='gray')
         # plt.show()
         # plt.imshow(downsampling_mask[0,0:1,:,:].detach().cpu().numpy().squeeze(), cmap='gray')
@@ -337,11 +337,6 @@ class ResNet(nn.Module):
         output['masks'] = downsampling_mask
 
         return output
-
-
-# network._resnet('resnet50', "Bottleneck", [3, 4, 6, 3], False, True)
-
-# def _resnet(arch, block, layers, pretrained, progress):
 
 def _resnet(config):
     arch = config.MODEL.BACKBONE

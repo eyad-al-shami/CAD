@@ -4,4 +4,5 @@ DATA:
   BATCH_SIZE: 28
 LOGGING:
   EXPERIMENT_NAME: "full run for 10 epochs"
-
+MODEL:
+  LR: 0.001
