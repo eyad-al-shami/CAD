@@ -35,9 +35,9 @@ class Trainer:
             for data, target in tqdm.tqdm(self.train_dataloader):
                 data, target = data.to(self.cfg.DEVICE), target.to(self.cfg.DEVICE)
                 optimizer.zero_grad()
-                predictions, mask = self.model(data)
+                predictions, _ = self.model(data)
                 
-                # mask = activation['mask']
+                mask = activation['mask']
                 mask = F.gumbel_softmax(mask, tau=1, hard=True, dim=1)
                 mask_low_res_active = mask[:,1:2,:,:].sum() / mask[:,1:2,:,:].numel()
                 loss_mask = (mask_low_res_active - self.cfg.MODEL.MASK_LOW_RES_ACTIVE).square()
