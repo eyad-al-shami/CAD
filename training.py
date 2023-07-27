@@ -35,7 +35,8 @@ class Trainer:
             for data, target in tqdm.tqdm(self.train_dataloader):
                 data, target = data.to(self.cfg.DEVICE), target.to(self.cfg.DEVICE)
                 optimizer.zero_grad()
-                predictions, _ = self.model(data)
+                output = self.model(data)
+                predictions = output['predictions']
                 
                 mask = activation['mask']
                 mask = F.gumbel_softmax(mask, tau=1, hard=True, dim=1)
