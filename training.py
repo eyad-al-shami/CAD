@@ -69,7 +69,7 @@ class Trainer:
         test_loss /= len(self.test_dataloader.dataset)
         self.wandb.log({'test_loss': test_loss, 'test_accuracy': correct / len(self.test_dataloader.dataset)})
         print('At Epoch  {}:  Test set: Accuracy: {}/{} ({:.0f}%)\n'.format(epoch, correct, len(self.test_dataloader.dataset), 100. * correct / len(self.test_dataloader.dataset)))
-        self.save_model_(self.model, epoch, correct / len(self.test_dataloader.dataset), self.cfg)
+        self.save_model_(correct / len(self.test_dataloader.dataset), epoch)
 
     def save_model_(self, accuracy, epoch):
         if (accuracy > self.highest_test_accuracy):
